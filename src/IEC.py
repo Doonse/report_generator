@@ -33,6 +33,14 @@ The user will only pass code and you MUST generate the summary of the code.
 Return ONLY the summary and nothing else.
 """
 
+# template = ChatPromptTemplate.from_messages([
+#     ("system", {system_template}),
+#     ("human", "Hello, how are you doing?"),
+#     ("ai", "I'm doing well, thanks!"),
+#     ("human", "{user_input}"),
+# ])
+
+
 human_template = '{category}'
 
 system_message = SystemMessagePromptTemplate.from_template(
@@ -49,7 +57,10 @@ prompt = ChatPromptTemplate.from_messages([system_message, human_message])
 # Create and run the LLMChain with the proper input
 chain = LLMChain(prompt=prompt, llm=agent)
 
+
+
 # Example usage
+# code_snippet = """ {user_input_code} """
 code_snippet = """
 def add(a, b):
     return a + b
@@ -60,6 +71,7 @@ def subtract(a, b):
 print(add(5, 3))
 print(subtract(5, 3))
 """
+
 
 # Run the chain and get the result
 result = chain.run(category=code_snippet)
